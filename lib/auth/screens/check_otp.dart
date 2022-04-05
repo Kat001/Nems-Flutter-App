@@ -32,6 +32,26 @@ class _CheckOtpState extends State<CheckOtp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 30.sp,
+          ),
+        ),
+        title: Text(
+          'Verify Otp',
+          style: TextStyle(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: buttonColor,
+      ),
       body: BlocListener<VerifyOtpBloc, VerifyOtpState>(
         listener: (context, state) {
           if (state is VerifyOtpSuccessState) {

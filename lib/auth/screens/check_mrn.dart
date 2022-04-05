@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:nems/auth/blocs/check_dob/check_dob_bloc.dart';
 
 import 'package:nems/auth/blocs/checkmrn/checkmrn_bloc.dart';
 import 'package:nems/auth/blocs/verifyotp/verifyotp_bloc.dart';
@@ -10,6 +11,8 @@ import 'package:nems/auth/blocs/verifyotp/verifyotp_bloc.dart';
 import 'package:nems/auth/screens/check_otp.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nems/auth/screens/dob_login.dart';
+import 'package:nems/auth/widgets/image_popup.dart';
 
 class CheckMrn extends StatefulWidget {
   const CheckMrn({Key? key}) : super(key: key);
@@ -33,18 +36,24 @@ class _CheckMrnState extends State<CheckMrn> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.pop(context);
           },
           icon: Icon(
             Icons.arrow_back_ios,
-            color: buttonColor,
-            size: 50,
+            size: 30.sp,
           ),
         ),
+        title: Text(
+          'Check Mrn',
+          style: TextStyle(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: buttonColor,
       ),
       backgroundColor: Colors.white,
       body: BlocListener<CheckMrnBloc, CheckMrnState>(
@@ -118,7 +127,14 @@ class _CheckMrnState extends State<CheckMrn> {
                   ),
                   InkWell(
                     onTap: () {
-                      print("do not have mrn");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                                  create: (context) => CheckDobBloc(),
+                                  child: DobLogin(),
+                                )),
+                      );
                     },
                     child: Text(
                       "Don’t have your MRN Number?",
@@ -133,16 +149,25 @@ class _CheckMrnState extends State<CheckMrn> {
                     height: 25.h,
                   ),
                   InkWell(
-                    onTap: () {
-                      print("where is my mrn");
+                    onTap: () async {
+                      await showDialog(
+                          context: context, builder: (_) => ImageDialog());
                     },
-                    child: Text(
-                      "Where is my MRN Number?",
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w600,
-                        color: darkTextColor,
-                      ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.info_outline_rounded),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        Text(
+                          "Where is my MRN Number?",
+                          style: TextStyle(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w600,
+                            color: darkTextColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(

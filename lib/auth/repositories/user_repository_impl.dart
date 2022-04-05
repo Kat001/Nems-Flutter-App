@@ -2,6 +2,7 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:nems/auth/models/auth_user_model.dart';
+import 'package:nems/auth/models/verify_dob.dart';
 import 'package:nems/auth/models/verify_mrn_model.dart';
 import 'package:nems/auth/repositories/user_repository.dart';
 import 'package:nems/auth/services/login_service.dart';
@@ -18,6 +19,19 @@ class UserRepositoryImpl extends UserRepository {
     try {
       final mrnData = await userAuth.verifyMrn(data);
       return Right(mrnData);
+    } on SocketException {
+      return Left(AppError(AppErrorType.network));
+    } on Exception {
+      return Left(AppError(AppErrorType.api));
+    }
+  }
+
+  @override
+  Future<Either<AppError, DobData>> verifyDob(
+      Map<dynamic, dynamic> data) async {
+    try {
+      final dobData = await userAuth.verifyDob(data);
+      return Right(dobData);
     } on SocketException {
       return Left(AppError(AppErrorType.network));
     } on Exception {

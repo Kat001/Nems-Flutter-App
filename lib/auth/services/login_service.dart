@@ -1,10 +1,12 @@
 import 'package:nems/auth/models/auth_user_model.dart';
+import 'package:nems/auth/models/verify_dob.dart';
 import 'package:nems/auth/models/verify_mrn_model.dart';
 import 'package:nems/core/api_client.dart';
 
 abstract class LoginUser {
   Future<MrnData> verifyMrn(Map<dynamic, dynamic> data);
   Future<AuthUser> loginUser(Map<dynamic, dynamic> data);
+  Future<DobData> verifyDob(Map<dynamic, dynamic> data);
 }
 
 class LoginUserImpl extends LoginUser {
@@ -17,6 +19,13 @@ class LoginUserImpl extends LoginUser {
     final response = await _client.post('/auth/verify-mrn/', params: data);
     final mrnData = MrnData.fromJson(response);
     return mrnData;
+  }
+
+  @override
+  Future<DobData> verifyDob(Map<dynamic, dynamic> data) async {
+    final response = await _client.post('/auth/dob-login/', params: data);
+    final dobData = DobData.fromJson(response);
+    return dobData;
   }
 
   @override

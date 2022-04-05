@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nems/auth/screens/check_otp.dart';
 import 'package:nems/auth/widgets/book_appointment.dart';
 import 'package:nems/auth/widgets/check_in.dart';
 
@@ -53,18 +52,33 @@ class _DashBoardState extends State<DashBoard> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.pop(context);
           },
           icon: Icon(
             Icons.arrow_back_ios,
-            color: buttonColor,
-            size: 50,
+            size: 30.sp,
           ),
         ),
+        title: Text(
+          'Dashboard',
+          style: TextStyle(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Icon(
+              Icons.logout,
+              size: 30.sp,
+            ),
+          ),
+        ],
+        backgroundColor: buttonColor,
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -75,7 +89,7 @@ class _DashBoardState extends State<DashBoard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 52.h,
+                  height: 30.h,
                 ),
                 Center(
                   child: Text(

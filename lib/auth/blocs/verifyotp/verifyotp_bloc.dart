@@ -40,16 +40,15 @@ class VerifyOtpBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
         emit(VerifyOtpErrorState());
       }, (r) async {
         _prefs.setString('access', r.access!);
-        // prefs.setString('refresh', r.refresh!);
-        // prefs.setString('id', r.user!.data!.id!);
-        // prefs.setString('mrn', r.user!.data!.mrn!);
-        // prefs.setString('firstName', r.user!.data!.firstName!);
-        // prefs.setString('lastName', r.user!.data!.lastName!);
-        // prefs.setString('email', r.user!.data!.email!);
-        // prefs.setString('phone', r.user!.data!.phone!);
-        // prefs.setString(
-        //     'preferredLocation', r.user!.preferredLocation.toString());
-        // prefs.setString('locationAddress', r.user!.locationAddress!);
+        _prefs.setString('refresh', r.refresh!);
+        _prefs.setString('id', r.user!.data!.id!);
+        _prefs.setString('mrn', r.user!.data!.mrn!);
+        _prefs.setString('firstName', r.user!.data!.firstName!);
+        _prefs.setString('lastName', r.user!.data!.lastName!);
+        _prefs.setString('email', r.user!.data!.email!);
+        _prefs.setString('phone', r.user!.data!.phone!);
+        _prefs.setInt('preferredLocation', r.user!.preferredLocation!);
+        _prefs.setString('locationAddress', r.user!.locationAddress!);
         emit(VerifyOtpSuccessState());
       });
     });

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nems/auth/screens/dash_board.dart';
+import 'package:nems/auth/screens/dob_login.dart';
 import 'package:nems/auth/screens/index.dart';
 import 'dart:core';
 
@@ -54,7 +55,6 @@ class _MyAppState extends State<MyApp> {
       builder: () => MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
           textTheme: GoogleFonts.nunitoTextTheme(
             Theme.of(context).textTheme,
           ),
